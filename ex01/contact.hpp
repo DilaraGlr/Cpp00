@@ -6,7 +6,7 @@
 /*   By: diguler <diguler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 16:15:23 by diguler           #+#    #+#             */
-/*   Updated: 2024/12/22 16:58:53 by diguler          ###   ########.fr       */
+/*   Updated: 2024/12/22 18:14:04 by diguler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ public:
             const std::string& nick = "", const std::string& phone = "",
             const std::string& secret = "");
 
+    ~Contact();
+    
     // Getters en ligne
     std::string getFirstName() const { return firstName; }
     std::string getLastName() const { return lastName; }

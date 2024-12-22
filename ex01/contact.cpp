@@ -6,7 +6,7 @@
 /*   By: diguler <diguler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 16:44:26 by diguler           #+#    #+#             */
-/*   Updated: 2024/12/22 17:01:28 by diguler          ###   ########.fr       */
+/*   Updated: 2024/12/22 18:14:34 by diguler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,9 @@ Contact::Contact(const std::string& first, const std::string& last,
 bool Contact::isValid() const 
 {
     return !firstName.empty() && !lastName.empty() && !nickname.empty() && !phoneNumber.empty();
+}
+
+Contact::~Contact() {
+    // Message pour montrer que le destructeur est appelé
+    std::cout << "Destructing contact: " << firstName << " " << lastName << std::endl;
 }
