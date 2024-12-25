@@ -1,28 +1,34 @@
-C++ = c++
-C++_FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
-INFILES = 	main.cpp\
-			Contact.cpp\
-			PhoneBook.cpp\
-			search_contact.cpp\
-
-OBJFILES = $(INFILES:.cpp=.o)
-
+# Nom de l'exécutable
 NAME = phonebook
 
+# Compilateur et options
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+
+# Fichiers sources
+SRCS = main.cpp contact.cpp phonebook.cpp
+
+# Fichiers objets générés
+OBJS = $(SRCS:.cpp=.o)
+
+# Règle par défaut
 all: $(NAME)
 
-$(NAME):$(OBJFILES)
-	$(C++) $(C++_FLAGS) $(OBJFILES) -o $(NAME) 
+# Compilation de l'exécutable
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
+# Compilation des fichiers objets
 %.o: %.cpp
-	$(C++) $(C++_FLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+# Nettoyage des fichiers objets
 clean:
-	rm -f $(OBJFILES)
+	rm -f $(OBJS)
 
+# Nettoyage complet
 fclean: clean
 	rm -f $(NAME)
 
+# Reconstruction complète
 re: fclean all
-
-.PHONY: all clean fclean re
