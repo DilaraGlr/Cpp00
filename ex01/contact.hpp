@@ -1,54 +1,36 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   contact.hpp                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: diguler <diguler@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/22 16:15:23 by diguler           #+#    #+#             */
-/*   Updated: 2024/12/25 19:07:16 by diguler          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
 
-#ifndef CONTACT_H
-#define CONTACT_H
-
+#include <iostream>
 #include <string>
 
 class Contact
-{
-private:
-    std::string firstName;
-    std::string lastName;
-    std::string nickname;
-    std::string phoneNumber;
-    std::string darkestSecret;
-public:
-        // Constructeur
-    Contact(const std::string& first = "", const std::string& last = "",
-            const std::string& nick = "", const std::string& phone = "",
-            const std::string& secret = "");
+{   
+    private:
+        std::string first_name;
+        std::string last_name;
+        std::string nickname;
+        std::string phone_number;
+        std::string darkest_secret;
 
-    ~Contact();
-    
-    // Getters en ligne
-    std::string getFirstName() const { return firstName; }
-    std::string getLastName() const { return lastName; }
-    std::string getNickname() const { return nickname; }
-    std::string getPhoneNumber() const { return phoneNumber; }
-    std::string getDarkestSecret() const { return darkestSecret; }
+        static Contact contacts[8];
 
-    // Setters en ligne
-    void setFirstName(const std::string& value) { firstName = value; }
-    void setLastName(const std::string& value) { lastName = value; }
-    void setNickname(const std::string& value) { nickname = value; }
-    void setPhoneNumber(const std::string& value) { phoneNumber = value; }
-    void setDarkestSecret(const std::string& value) { darkestSecret = value; }
-
-    // Méthode pour valider si un contact est valide
-    bool isValid() const;
+    public:
+        Contact();
+        ~Contact();
+        
+        void set_first_name(std::string first_name) { this->first_name = first_name; };
+        void set_last_name(std::string last_name) { this->last_name = last_name; };
+        void set_nickname(std::string nickname) { this->nickname = nickname; };
+        void set_phone_number(std::string phone_number) { this->phone_number = phone_number; };
+        void set_darkest_secret(std::string _arkest_secret) { this->darkest_secret = _arkest_secret; };
+        
+        std::string get_first_name() const { return this->first_name; };
+        std::string get_last_name() const { return this->last_name; };
+        std::string get_nickname() const { return this->nickname; };
+        std::string get_phone_number() const { return this->phone_number; };
+        std::string get_darkest_secret() const { return this->darkest_secret; };
 
 };
 
 #endif
-
