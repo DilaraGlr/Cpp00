@@ -10,7 +10,7 @@ int main()
 
     while (1)
     {
-        std::cout << "Enter command: ";
+        std::cout << "Enter command (ADD, SEARCH, EXIT): ";
         std::getline(std::cin, command);
         if (command == "ADD")
         {

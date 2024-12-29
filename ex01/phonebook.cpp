@@ -6,14 +6,21 @@ Phonebook::Phonebook()
 }
 void Phonebook::add_contact(Contact contact)
 {
+    static int oldest_index = 0; // Garde une trace du plus ancien contact
+
     if (this->contact_count < 8)
     {
         this->contacts[this->contact_count] = contact;
         this->contact_count++;
     }
     else
-        std::cout << "Phonebook is full." << std::endl;
+    {
+        std::cout << "Phonebook is full. Replacing the oldest contact." << std::endl;
+        this->contacts[oldest_index] = contact; // Remplace le contact le plus ancien
+        oldest_index = (oldest_index + 1) % 8;  // Passe au prochain index circulairement
+    }
 }
+
 void Phonebook::search_contact() const
 {
     std::string index;
@@ -24,16 +31,17 @@ void Phonebook::search_contact() const
         std::cout << "Phonebook is empty." << std::endl;
         return;
     }
-    std::cout << "     index|first name| last name|  nickname| phone number | darkest secret" << std::endl;
+    std::cout << "     index|first name| last name|  nickname| phone num|  secret" << std::endl;
     for (i = 0; i < this->contact_count; i++)
     {
         std::cout << std::setw(10) << i + 1 << "|";
         std::cout << std::setw(10) << this->contacts[i].get_first_name().substr(0, 10) << "|";
         std::cout << std::setw(10) << this->contacts[i].get_last_name().substr(0, 10) << "|";
-        std::cout << std::setw(10) << this->contacts[i].get_nickname().substr(0, 10) << std::endl;
-        std::cout << std::setw(10) << this->contacts[i].get_phone_number().substr(0, 10) << std::endl;
+        std::cout << std::setw(10) << this->contacts[i].get_nickname().substr(0, 10) << "|";
+        std::cout << std::setw(10) << this->contacts[i].get_phone_number().substr(0, 10) << "|";
         std::cout << std::setw(10) << this->contacts[i].get_darkest_secret().substr(0, 10) << std::endl;
     }
+
     std::cout << "Enter index: ";
     std::getline(std::cin, index);
     if (index.length() == 1 && isdigit(index[0]))
