@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 class Contact
 {   
@@ -19,11 +20,11 @@ class Contact
         Contact();
         ~Contact();
         
-        void set_first_name(std::string first_name) { this->first_name = first_name; };
-        void set_last_name(std::string last_name) { this->last_name = last_name; };
-        void set_nickname(std::string nickname) { this->nickname = nickname; };
-        void set_phone_number(std::string phone_number) { this->phone_number = phone_number; };
-        void set_darkest_secret(std::string _arkest_secret) { this->darkest_secret = _arkest_secret; };
+        int set_first_name(std::string first_name);
+        int set_last_name(std::string last_name);
+        int set_nickname(std::string nickname);
+        int set_phone_number(std::string phone_number);
+        int set_darkest_secret(std::string _arkest_secret);
         
         std::string get_first_name() const { return this->first_name; };
         std::string get_last_name() const { return this->last_name; };

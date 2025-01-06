@@ -20,6 +20,7 @@ class Phonebook
         void search_contact() const;
         void exit_contact() const;
         void print_contact(Contact contact) const;
+        std::string _trunc(std::string str) const;
 };
 
 #endif

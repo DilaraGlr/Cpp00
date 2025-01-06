@@ -12,6 +12,8 @@ int main()
     {
         std::cout << "Enter command (ADD, SEARCH, EXIT): ";
         std::getline(std::cin, command);
+        if (std::cin.eof())
+			        exit(1);
         if (command == "ADD")
         {
             Contact contact;
@@ -23,19 +25,63 @@ int main()
 
             std::cout << "Enter first name: ";
             std::getline(std::cin, first_name);
-            contact.set_first_name(first_name);
+            if (std::cin.eof())
+			        exit(1);
+            while(!contact.set_first_name(first_name))
+            {
+                std::cout << "Enter first name: ";
+                std::getline(std::cin, first_name);
+                if (std::cin.eof())
+			        exit(1);
+            }
+
             std::cout << "Enter last name: ";
             std::getline(std::cin, last_name);
-            contact.set_last_name(last_name);
+            if (std::cin.eof())
+			        exit(1);
+            while(!contact.set_last_name(last_name))
+            {
+                std::cout << "Enter last name: ";
+                std::getline(std::cin, last_name);
+                if (std::cin.eof())
+			        exit(1);
+            }
+
             std::cout << "Enter nickname: ";
             std::getline(std::cin, nickname);
-            contact.set_nickname(nickname);
+            if (std::cin.eof())
+			        exit(1);
+            while(!contact.set_nickname(nickname))
+            {
+                std::cout << "Enter nickname: ";
+                std::getline(std::cin, nickname);
+                if (std::cin.eof())
+			        exit(1);
+            }
+            
             std::cout << "Enter phone number: ";
             std::getline(std::cin, phone_number);
-            contact.set_phone_number(phone_number);
+            if (std::cin.eof())
+			        exit(1);
+            while(!contact.set_phone_number(phone_number))
+            {
+                std::cout << "Enter phone number: ";
+                std::getline(std::cin, phone_number);
+                if (std::cin.eof())
+			        exit(1);
+            }
+
             std::cout << "Enter darkest secret: ";
             std::getline(std::cin, darkest_secret);
-            contact.set_darkest_secret(darkest_secret);
+            if (std::cin.eof())
+			        exit(1);
+            while(!contact.set_darkest_secret(darkest_secret))
+            {
+                std::cout << "Enter darkest secret: ";
+                std::getline(std::cin, darkest_secret);
+                if (std::cin.eof())
+			        exit(1);
+            }
             phonebook.add_contact(contact);
         }
         else if (command == "SEARCH")
@@ -50,4 +96,3 @@ int main()
     }
     return 0;
 }
-

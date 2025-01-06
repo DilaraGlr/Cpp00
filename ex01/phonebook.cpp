@@ -31,22 +31,33 @@ void Phonebook::search_contact() const
         std::cout << "Phonebook is empty." << std::endl;
         return;
     }
-    std::cout << "     index|first name| last name|  nickname| phone num|  secret" << std::endl;
+    std::cout << "|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|" << std::endl;
+	std::cout << "|                 PHONEBOOK                 |" << std::endl;
+	std::cout << "|___________________________________________|" << std::endl;
+	std::cout << "|          |          |          |          |" << std::endl;
+	std::cout << "|" << std::setw(10) << "Index";
+	std::cout << "|" << std::setw(10) << "First name";
+	std::cout << "|" << std::setw(10) << "Last name";
+	std::cout << "|" << std::setw(10) << "Nick name";
+	std::cout << "|" << std::endl;
+	std::cout << "|__________|__________|__________|__________|" << std::endl;
     for (i = 0; i < this->contact_count; i++)
     {
-        std::cout << std::setw(10) << i + 1 << "|";
-        std::cout << std::setw(10) << this->contacts[i].get_first_name().substr(0, 10) << "|";
-        std::cout << std::setw(10) << this->contacts[i].get_last_name().substr(0, 10) << "|";
-        std::cout << std::setw(10) << this->contacts[i].get_nickname().substr(0, 10) << "|";
-        std::cout << std::setw(10) << this->contacts[i].get_phone_number().substr(0, 10) << "|";
-        std::cout << std::setw(10) << this->contacts[i].get_darkest_secret().substr(0, 10) << std::endl;
+         std::cout << "|          |          |          |          |" << std::endl;
+	std::cout << "|" << std::setw(10) << i+1 << std::flush;
+	std::cout << "|" << std::setw(10) << this->_trunc(this->contacts[i].get_first_name()) << std::flush;
+	std::cout << "|" << std::setw(10) << this->_trunc(this->contacts[i].get_last_name())<< std::flush;
+	std::cout << "|" << std::setw(10) << this->_trunc(this->contacts[i].get_nickname()) << std::flush;
+	std::cout << "|" << std::endl;
+	std::cout << "|__________|__________|__________|__________|" << std::endl;
     }
+   
 
     std::cout << "Enter index: ";
     std::getline(std::cin, index);
     if (index.length() == 1 && isdigit(index[0]))
     {
-        i = index[0] - '0';
+       i = index[0] - '0';
         if (i > 0 && i <= this->contact_count)
             this->print_contact(this->contacts[i - 1]);
         else
@@ -54,6 +65,18 @@ void Phonebook::search_contact() const
     }
     else
         std::cout << "Invalid index." << std::endl;
+}
+
+std::string Phonebook::_trunc(std::string str) const
+{
+	if (str.length() > 10)
+	{
+		std::string trunc = str.substr(0, 9);
+		trunc += '.';
+		return (trunc);
+	}
+	else
+		return (str);
 }
 
 void Phonebook::print_contact(Contact contact) const
