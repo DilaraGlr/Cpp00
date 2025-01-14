@@ -3,40 +3,38 @@
 #include <ctime>
 #include <iomanip>
 
-// Initialisation des variables statiques
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
 int Account::_totalNbWithdrawals = 0;
 
-// Méthode statique : retourne le nombre total de comptes
-int Account::getNbAccounts(void) {
+int Account::getNbAccounts(void) 
+{
     return _nbAccounts;
 }
 
-// Méthode statique : retourne le montant total des comptes
-int Account::getTotalAmount(void) {
+int Account::getTotalAmount(void) 
+{
     return _totalAmount;
 }
 
-// Méthode statique : retourne le nombre total de dépôts
-int Account::getNbDeposits(void) {
+int Account::getNbDeposits(void) 
+{
     return _totalNbDeposits;
 }
 
-// Méthode statique : retourne le nombre total de retraits
-int Account::getNbWithdrawals(void) {
+int Account::getNbWithdrawals(void) 
+{
     return _totalNbWithdrawals;
 }
 
-// Méthode statique : affiche les informations globales des comptes
-void Account::displayAccountsInfos(void) {
+void Account::displayAccountsInfos(void) 
+{
     _displayTimestamp();
     std::cout << "accounts:" << _nbAccounts << ";total:" << _totalAmount << ";deposits:" 
               << _totalNbDeposits << ";withdrawals:" << _totalNbWithdrawals << std::endl;
 }
 
-// Constructeur
 Account::Account(int initial_deposit)
     : _accountIndex(_nbAccounts), _amount(initial_deposit), _nbDeposits(0), _nbWithdrawals(0) {
     _nbAccounts++;          // Augmente le nombre total de comptes
@@ -46,7 +44,6 @@ Account::Account(int initial_deposit)
 				<< "amount:" << _amount << ";created" << std::endl;
 }
 
-// Destructeur
 Account::~Account(void)
 {
 	_displayTimestamp();
@@ -54,7 +51,8 @@ Account::~Account(void)
 }
 
 // Méthode pour faire un dépôt
-void Account::makeDeposit(int deposit) {
+void Account::makeDeposit(int deposit) 
+{
     _displayTimestamp();
 	this->_nbDeposits++;
 	std::cout << "index:" << _accountIndex << ";"
@@ -67,42 +65,50 @@ void Account::makeDeposit(int deposit) {
 }
 
 // Méthode pour faire un retrait
-bool Account::makeWithdrawal(int withdrawal) {
-    _displayTimestamp();
-	std::cout << "index:" << _accountIndex << ";"
-				<< "p_amount:" << _amount << ";"
-				<< "withdrawal:" << withdrawal << ";";
-    if (checkAmount() < withdrawal) {
-        std::cout << "withdrawal:refused" << std::endl;
-        return false; // Si le solde est insuffisant, l'opération échoue
-    }
-        _amount -= withdrawal;
-        _nbWithdrawals++;
-        _totalAmount -= withdrawal;
-        _totalNbWithdrawals++;
-	    std::cout << withdrawal << ":amount:" << _amount << ";nb_withdrawals:" << _nbWithdrawals << std::endl;
-        return true;
+bool Account::makeWithdrawal(int withdrawal) 
+{
+    if (_amount > withdrawal)
+	{
+		_displayTimestamp();
+		_nbWithdrawals++;
+		_totalNbWithdrawals++;
+		std::cout << "index:" << _accountIndex << ";p_amount:" << _amount << ";withdrawal:" << withdrawal
+			<< ";amount:" << _amount - withdrawal << ";nb_withdrawals:" << _nbWithdrawals << std::endl;
+		_amount -= withdrawal;
+		_totalAmount -= withdrawal;
+
+		return (true);
+	}
+	else
+	{
+		_displayTimestamp();
+		std::cout << "index:" << _accountIndex << ";p_amount:" << _amount << ";withdrawal:refused" 
+			<< std::endl;
+		return (false);
+	}
 }
 
 // Méthode pour vérifier le montant du compte
-int Account::checkAmount(void) const {
+int Account::checkAmount(void) const 
+{
     return _amount;
 }
 
 // Méthode pour afficher l'état du compte
-void Account::displayStatus(void) const {
+void Account::displayStatus(void) const 
+{
     _displayTimestamp();
     std::cout << "index:" << _accountIndex
-     << ";p_amount:" << _amount 
+     << ";amount:" << _amount 
      << ";deposits:" << _nbDeposits 
      << ";withdrawals:" << _nbWithdrawals
     << std::endl;
 }
 
 // Méthode privée pour afficher l'horodatage (timestamp)
-void Account::_displayTimestamp(void) {
-    // Format de l'horodatage
-std::cout << std::setfill('0') << "[";
+void Account::_displayTimestamp(void) 
+{
+    std::cout << std::setfill('0') << "[";
 	std::time_t now = std::time(0);
 	std::tm *local_time = std::localtime(&now);
 	std::cout << 1900 + local_time->tm_year;
